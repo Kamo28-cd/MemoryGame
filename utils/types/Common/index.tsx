@@ -7,3 +7,11 @@ export type ICardProps = {
 }[];
 
 type TStatus = "active" | "correct" | "incorrect" | string;
+
+export type TScore = {
+  player?: string;
+  points: number;
+  moves: number;
+  isTurn?: boolean;
+  [x: string]: any;
+}[];

@@ -4,6 +4,14 @@ import { MemoryCardContainer } from "./styles";
 import Card from "./Card";
 import { ICardProps } from "@/utils/types/Common";
 import { isGameComplete, sortCards } from "@/utils/functions/helper";
+import {
+  initialScore,
+  useScoreContext,
+  useScoreUpdateContext,
+} from "@/context";
+import FlexContainer from "@/components/common/FlexContainer";
+import { Typography } from "@mui/material";
+import Legend from "../Legend";
 
 interface IStorage {
   [x: string]: any;
@@ -12,18 +20,29 @@ interface IStorage {
 const MemoryCards = () => {
   const [cards, setCards] = useState<ICardProps & IStorage>([]);
   const [prevEl, setPrevEl] = useState(-1);
+  const scoreSheet = useScoreContext();
+  const setScoreSheet = useScoreUpdateContext();
 
   useEffect(() => {
     const gameData: string | null = localStorage.getItem("cards");
+    const scoreData: string | null = localStorage.getItem("score");
 
-    if (gameData) {
+    // setScoreSheet({ player: "Kamo", points: 1, moves: 2 });
+
+    if (gameData && scoreData) {
       const game = JSON.parse(gameData);
+      const scoreArray = JSON.parse(scoreData);
+
       if (isGameComplete(game)) {
         setCards(sortCards(cardData));
+        setScoreSheet(initialScore[0]);
+        localStorage.removeItem("cards");
+        localStorage.removeItem("score");
       }
 
       if (!isGameComplete(game)) {
         setCards(game);
+        setScoreSheet(scoreArray[0]);
       }
     }
 
@@ -31,6 +50,22 @@ const MemoryCards = () => {
       setCards(sortCards(cardData));
     }
   }, []);
+
+  useEffect(() => {
+    const gameData: string | null = localStorage.getItem("cards");
+    const scoreData: string | null = localStorage.getItem("score");
+
+    if (gameData && scoreData) {
+      const game = JSON.parse(gameData);
+      const scoreArray = JSON.parse(scoreData);
+
+      if (isGameComplete(game)) {
+        setScoreSheet(initialScore[0]);
+        localStorage.removeItem("cards");
+        localStorage.removeItem("score");
+      }
+    }
+  }, [cards]);
 
   const evaluateIndex = (current: number) => {
     if (
@@ -43,10 +78,14 @@ const MemoryCards = () => {
       setCards([...cards]);
       setPrevEl(-1);
       localStorage.setItem("cards", JSON.stringify(cards));
+      setScoreSheet({ points: 1, moves: 1 });
+      localStorage.setItem("score", JSON.stringify(scoreSheet));
     } else {
       cards[current].status = "incorrect";
       cards[prevEl].status = "incorrect";
       setCards([...cards]);
+      setScoreSheet({ points: 0, moves: 1 });
+      localStorage.setItem("score", JSON.stringify(scoreSheet));
       setTimeout(() => {
         cards[current].status = "";
         cards[prevEl].status = "";
@@ -59,7 +98,6 @@ const MemoryCards = () => {
   const handleClick = (index: number) => {
     if (prevEl === -1) {
       cards[index].status = "active";
-
       setCards([...cards]);
       setPrevEl(index);
     } else {
@@ -67,11 +105,14 @@ const MemoryCards = () => {
     }
   };
   return (
-    <MemoryCardContainer>
-      {cards.map((card, index) => (
-        <Card key={index} {...{ ...card, index, handleClick }} />
-      ))}
-    </MemoryCardContainer>
+    <>
+      <Legend />
+      <MemoryCardContainer>
+        {cards.map((card, index) => (
+          <Card key={index} {...{ ...card, index, handleClick }} />
+        ))}
+      </MemoryCardContainer>
+    </>
   );
 };
 
