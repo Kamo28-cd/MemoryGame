@@ -1,8 +1,8 @@
-import CustomButton from "@/components/common/CustomButton";
+import HomePage from "@/components/page/HomePage";
 import React from "react";
 
 const Home = () => {
-  return <div>HomePage</div>;
+  return <HomePage />;
 };
 
 export default Home;
