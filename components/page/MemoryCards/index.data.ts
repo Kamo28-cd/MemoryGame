@@ -7,12 +7,4 @@ export const cardData = [
   { id: 3, status: "", image: "/images/3.jpg" },
   { id: 4, status: "", image: "/images/4.jpg" },
   { id: 4, status: "", image: "/images/4.jpg" },
-  //   { id: 5, status: "", image: "/images/5.jpg" },
-  //   { id: 5, status: "", image: "/images/5.jpg" },
-  //   { id: 6, status: "", image: "/images/6.jpg" },
-  //   { id: 6, status: "", image: "/images/6.jpg" },
-  //   { id: 7, status: "", image: "/images/7.jpg" },
-  //   { id: 7, status: "", image: "/images/7.jpg" },
-  //   { id: 8, status: "", image: "/images/8.jpg" },
-  //   { id: 8, status: "", image: "/images/8.jpg" },
 ];

@@ -30,13 +30,7 @@ const ScoreContextProvider: React.FC<IScoreContextProvider> = ({
   const [score, setScore] = useState<TScore & IScoreIndex>(initialScore);
 
   const handleSetScore = (obj: TScore[0]) => {
-    const objKeys = Object.keys(obj);
-
-    // for (const key in obj) {
-    //   score[0][key as keyof typeof obj] = obj[key as keyof typeof obj];
-    // }
-
-    // check if single player or multi player
+    // TODO: check if single player or multi player
 
     Object.keys(obj).forEach((key) => {
       if (key === "points") {
