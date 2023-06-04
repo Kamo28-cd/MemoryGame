@@ -9,7 +9,7 @@ export const MemoryCardContainer = styled.div`
   gap: 1em;
   margin-top: 20px;
 
-  /* @media screen and (max-width: 640px) {
-    width: auto;
-  } */
+  @media screen and (max-width: 420px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;

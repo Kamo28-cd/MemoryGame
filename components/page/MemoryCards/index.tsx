@@ -9,8 +9,6 @@ import {
   useScoreContext,
   useScoreUpdateContext,
 } from "@/context";
-import FlexContainer from "@/components/common/FlexContainer";
-import { Typography } from "@mui/material";
 import Legend from "../Legend";
 
 interface IStorage {
@@ -26,8 +24,6 @@ const MemoryCards = () => {
   useEffect(() => {
     const gameData: string | null = localStorage.getItem("cards");
     const scoreData: string | null = localStorage.getItem("score");
-
-    // setScoreSheet({ player: "Kamo", points: 1, moves: 2 });
 
     if (gameData && scoreData) {
       const game = JSON.parse(gameData);
@@ -57,7 +53,6 @@ const MemoryCards = () => {
 
     if (gameData && scoreData) {
       const game = JSON.parse(gameData);
-      const scoreArray = JSON.parse(scoreData);
 
       if (isGameComplete(game)) {
         setScoreSheet(initialScore[0]);
