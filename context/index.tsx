@@ -2,7 +2,7 @@ import { TScore } from "@/utils/types/Common";
 import React, { ReactNode, useContext, useState, createContext } from "react";
 
 export const initialScore = [
-  { player: "Player 1", points: 0, moves: 0, isTurn: true },
+  { player: "You", points: 0, moves: 0, isTurn: true },
 ];
 
 export const ScoreContext = createContext<TScore>(initialScore);
