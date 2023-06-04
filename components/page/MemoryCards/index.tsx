@@ -55,7 +55,7 @@ const MemoryCards = () => {
       const game = JSON.parse(gameData);
 
       if (isGameComplete(game)) {
-        setScoreSheet(initialScore[0]);
+        // setScoreSheet(initialScore[0]);
         localStorage.removeItem("cards");
         localStorage.removeItem("score");
       }
