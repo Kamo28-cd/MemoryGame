@@ -7,7 +7,7 @@ import { CardContainer } from "./styles";
 const HomePage = () => {
   return (
     <FlexContainer flexDirection="column">
-      <Typography variant="h3" color={"white"}>
+      <Typography variant="h4" color={"white"}>
         Memory Card Game
       </Typography>
       <CardContainer>

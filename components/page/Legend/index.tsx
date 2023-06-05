@@ -12,7 +12,11 @@ import React from "react";
 import { StyledTableContainer } from "./styles";
 import { useScoreContext } from "@/context";
 
-const Legend: React.FC = () => {
+interface ILegendProps {
+  tries: number;
+}
+
+const Legend: React.FC<ILegendProps> = ({ tries }) => {
   const rows = useScoreContext();
 
   return (
@@ -35,7 +39,9 @@ const Legend: React.FC = () => {
                 {row.player}
               </TableCell>
               <TableCell align="right">{row.points}</TableCell>
-              <TableCell align="right">{row.moves}</TableCell>
+              <TableCell align="right">
+                {tries >= row.moves ? row.moves : tries}/{tries}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
