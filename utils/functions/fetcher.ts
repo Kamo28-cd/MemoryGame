@@ -14,8 +14,7 @@ export default async function fetcher<JSON = any>(
 }
 
 export const useGetUser = () => {
-  const url =
-    "http://api.stackexchange.com/2.2/users?pagesize=20&order=desc&sort=reputation&site=stackoverflow";
+  const url = "http://custom-url";
 
   const { data, error, isLoading } = useSWR(url, fetcher);
 

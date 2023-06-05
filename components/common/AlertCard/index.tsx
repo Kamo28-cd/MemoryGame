@@ -7,12 +7,14 @@ import { StyledContainer } from "./styles";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import { CircularProgress } from "@mui/material";
+import MoodIcon from "@mui/icons-material/Mood";
+import MoodBadIcon from "@mui/icons-material/MoodBad";
 
 interface AlertCardProps {
   messages: string[];
   heading?: string;
   feedback?: string;
-  type: "error" | "success" | "warning" | "loading";
+  type: "error" | "success" | "warning" | "loading" | "win" | "lose";
   children?: ReactNode;
   className?: string;
 }
@@ -37,6 +39,10 @@ const AlertCard: React.FC<AlertCardProps> = ({
             <WarningAmberIcon color="warning" fontSize="large" />
           ) : type === "loading" ? (
             <CircularProgress size={"2em"} color="inherit" />
+          ) : type === "win" ? (
+            <MoodIcon color="success" fontSize="large" />
+          ) : type === "lose" ? (
+            <MoodBadIcon color="error" fontSize="large" />
           ) : null}
         </ThemeProvider>
         {heading ? <h3>{heading}</h3> : null}

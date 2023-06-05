@@ -10,6 +10,7 @@ import {
   useScoreUpdateContext,
 } from "@/context";
 import Legend from "../Legend";
+import GameStatus from "../GameStatus";
 
 interface IStorage {
   [x: string]: any;
@@ -20,6 +21,7 @@ const MemoryCards = () => {
   const [prevEl, setPrevEl] = useState(-1);
   const scoreSheet = useScoreContext();
   const setScoreSheet = useScoreUpdateContext();
+  const numberOfTries = 8;
 
   useEffect(() => {
     const gameData: string | null = localStorage.getItem("cards");
@@ -85,7 +87,7 @@ const MemoryCards = () => {
         cards[prevEl].status = "";
         setCards([...cards]);
         setPrevEl(-1);
-      }, 2000);
+      }, 1000);
     }
   };
 
@@ -100,11 +102,13 @@ const MemoryCards = () => {
   };
   return (
     <>
-      <Legend />
+      <Legend tries={numberOfTries} />
       <MemoryCardContainer>
         {cards.map((card, index) => (
           <Card key={index} {...{ ...card, index, handleClick }} />
         ))}
+
+        <GameStatus tries={numberOfTries} />
       </MemoryCardContainer>
     </>
   );
